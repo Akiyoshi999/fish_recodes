@@ -13,6 +13,6 @@ class RecodeController extends Controller
      */
     public function showList()
     {
-        return view('recode.list');
+        return view('recode.recodes'); // resourcesのview配下
     }
 }
