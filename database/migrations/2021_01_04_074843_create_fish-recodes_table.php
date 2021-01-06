@@ -25,7 +25,7 @@ class CreateFishRecodesTable extends Migration
                 $table->string('temperature');
                 $table->integer('length');
                 $table->text('comment');
-                // $table->timestamps();
+                $table->timestamps();
             });
         }
     }
@@ -39,5 +39,6 @@ class CreateFishRecodesTable extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('recodes');
     }
 }
