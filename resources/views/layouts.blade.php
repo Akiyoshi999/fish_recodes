@@ -37,6 +37,7 @@
                 </p>
             </div>
         </section>
+        <p class="text-danger">{{ session('err_msg') }}</p>
 
         <div class="album py-5 bg-light">
             <div class="container">

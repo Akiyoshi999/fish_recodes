@@ -23,6 +23,7 @@ class CreateFishRecodesTable extends Migration
                 $table->string('weather');
                 $table->string('tide');
                 $table->string('temperature');
+                $table->string('fish');
                 $table->integer('length');
                 $table->text('comment');
                 $table->timestamps();

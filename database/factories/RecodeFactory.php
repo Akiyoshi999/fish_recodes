@@ -41,6 +41,12 @@ class RecodeFactory extends Factory
             "長潮", "若潮",
         ];
 
+        $fish = [
+            "シーバス", "タイ", "アジ", "太刀魚", "メバル", "カサゴ", "ブリ", "イカ",
+            "ヒラメ", "タコ", "カマス", "カレイ", "サワラ", "カンパチ", "イサキ",
+            "サヨリ", "イサキ", "ダツ", "シイラ", "マグロ",
+        ];
+
         return [
             // テストデータを作成
             'user' => $this->faker->name,
@@ -49,6 +55,7 @@ class RecodeFactory extends Factory
             'weather' => $this->faker->randomElement($weather),
             'tide' => $this->faker->randomElement($tide),
             'temperature' => $this->faker->numberBetween($min = -20, $max = 50),
+            'fish' => $this->faker->randomElement($fish),
             'length' => $this->faker->numberBetween($min = 0, $max = 200),
             'comment' => $this->faker->realText($maxNbChars = 50),
         ];

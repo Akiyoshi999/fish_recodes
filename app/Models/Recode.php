@@ -12,6 +12,8 @@ class Recode extends Model
     // テーブル名
     protected $table = 'recodes';
 
+    protected $dates = ['date'];
+
     // 可変項目
     protected $fillable = [
         'user',
@@ -20,6 +22,7 @@ class Recode extends Model
         'weather',
         'tide',
         'temperature',
+        'fish',
         'length',
         'comment'
     ];

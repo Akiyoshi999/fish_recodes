@@ -17,8 +17,5 @@ use App\Http\Controllers\RecodeController;
 // 釣り記録一覧を表示
 Route::get('/recodes', [RecodeController::class, 'showList'])->name('recodes');
 
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
+// 釣り記録詳細を表示
+Route::get('/recodes/{id}', [RecodeController::class, 'showDetail'])->name('recode');
