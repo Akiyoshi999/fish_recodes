@@ -21,6 +21,8 @@ class RecodeController extends Controller
         // resourcesのview配下,第2引数で配列をviewに渡す
         return view('recode.recodes', ['recodes' => $recodes]);
     }
+
+
     /**
      * 釣り記録詳細を表示する
      * @param int $id 
@@ -40,6 +42,8 @@ class RecodeController extends Controller
         // resourcesのview配下,第2引数で配列をviewに渡す
         return view('recode.detail', ['recode' => $recode]);
     }
+
+
     /**
      * 釣果記録登録画面を表示する
      * 
@@ -49,6 +53,9 @@ class RecodeController extends Controller
     {
         return view('recode.form');
     }
+
+
+
     /**
      * 釣果を登録する
      * 
@@ -56,14 +63,8 @@ class RecodeController extends Controller
      */
     public function exeStore(RecodeRequest $request)
     {
-        // $validated = $request->validate([
-        //     'date' => 'required'
-        // ]);
-        // dd($request->all());
         // 釣果記録を受け取る
-        // dump($validated);
         $input = $request->all();
-        // dd($input);
 
         \DB::beginTransaction();
         try {
@@ -76,6 +77,67 @@ class RecodeController extends Controller
         }
 
         \Session::flash('seccess_msg', '釣果を登録しました。');
+        return redirect(route('recodes'));
+    }
+
+
+    /**
+     * 釣果記録の編集画面を表示する
+     * @param int $id 
+     * @return view
+     */
+    public function showEdit($id)
+    {
+        $recode = Recode::find($id);
+
+        // データチェック
+        if (is_null($recode)) {
+            \Session::flash('err_msg', 'データがありません');
+            return redirect(route('recodes'));
+        }
+
+        // resourcesのview配下,第2引数で配列をviewに渡す
+        return view('recode.edit', ['recode' => $recode]);
+    }
+
+
+    /**
+     * 釣果情報を更新する
+     * 
+     * @return view
+     */
+    public function exeUpdate(RecodeRequest $request)
+    {
+        // 釣果情報を受け取る
+        $input = $request->all();
+
+
+        dump($input);
+        dump($input['id']);
+        // dd($input);
+        \DB::beginTransaction();
+        try {
+            // 釣果情報を更新
+            $recode = Recode::find($input['id']);
+            $recode->fill([
+                'user' => $input['user'],
+                'date' => $input['date'],
+                'place' => $input['place'],
+                'weather' => $input['weather'],
+                'tide' => $input['tide'],
+                'temperature' => $input['temperature'],
+                'fish' => $input['fish'],
+                'length' => $input['length'],
+                'comment' => $input['comment'],
+            ]);
+            $recode->save();
+            \DB::commit();
+        } catch (\Throwable $e) {
+            \DB::rollback();
+            abort(500);
+        }
+
+        \Session::flash('seccess_msg', '釣果情報を更新しました。');
         return redirect(route('recodes'));
     }
 }

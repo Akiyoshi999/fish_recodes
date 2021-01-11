@@ -50,11 +50,11 @@ class RecodeFactory extends Factory
         return [
             // テストデータを作成
             'user' => $this->faker->name,
-            'date' => $this->faker->dateTime($timezone = "Asia/Tokyo"),
+            'date' => $this->faker->dateTimeThisDecade($timezone = "Asia/Tokyo"),
             'place' => $this->faker->randomElement($locale),
             'weather' => $this->faker->randomElement($weather),
             'tide' => $this->faker->randomElement($tide),
-            'temperature' => $this->faker->numberBetween($min = -20, $max = 50),
+            'temperature' => $this->faker->numberBetween($min = -10, $max = 50),
             'fish' => $this->faker->randomElement($fish),
             'length' => $this->faker->numberBetween($min = 0, $max = 200),
             'comment' => $this->faker->realText($maxNbChars = 50),
