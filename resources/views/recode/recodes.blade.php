@@ -23,7 +23,7 @@
                                 <!-- <button type="button" class="btn btn-sm btn-outline-secondary">View</button> -->
                                 <a class="btn btn-sm btn-outline-secondary" href="recode/{{ $recode->id }}">詳細</a>
                                 <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
-                                <button type="button" class="btn btn-sm btn-outline-secondary">編集</button>
+                                <a class="btn btn-sm btn-outline-secondary" href="recode/edit/{{ $recode->id }}">編集</a>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">削除</button>
                             </div>
                             <!-- <small class="text-muted">9 mins</small> -->
