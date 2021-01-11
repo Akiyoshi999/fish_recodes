@@ -15,7 +15,13 @@ use App\Http\Controllers\RecodeController;
 */
 
 // 釣り記録一覧を表示
-Route::get('/recodes', [RecodeController::class, 'showList'])->name('recodes');
+Route::get('/', [RecodeController::class, 'showList'])->name('recodes');
+
+// 釣果記録登録画面を表示
+Route::get('/recode/create', [RecodeController::class, 'showCreate'])->name('create');
+
+// 釣果記録登録
+Route::post('/recode/store', [RecodeController::class, 'exeStore'])->name('store');
 
 // 釣り記録詳細を表示
-Route::get('/recodes/{id}', [RecodeController::class, 'showDetail'])->name('recode');
+Route::get('/recode/{id}', [RecodeController::class, 'showDetail'])->name('recode');

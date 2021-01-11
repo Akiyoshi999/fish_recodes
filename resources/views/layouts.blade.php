@@ -2,6 +2,8 @@
 <html lang="ja">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -31,12 +33,13 @@
                 <p class="lead text-muted">釣った魚の記録を残して、釣りの記録を残していきましょう！</p>
                 <p>
                     <!-- <a href="#" class="btn btn-primary my-2">Main call to action</a> -->
-                    <a href="#" class="btn btn-primary my-2">釣果を記録する</a>
+                    <a href="{{ route('create') }}" class="btn btn-primary my-2">釣果を記録する</a>
                     <!-- <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
                     <a href="#" class="btn btn-secondary my-2">サブアクション</a>
                 </p>
             </div>
         </section>
+        <p class="text-success">{{ session('success_msg') }}</p>
         <p class="text-danger">{{ session('err_msg') }}</p>
 
         <div class="album py-5 bg-light">

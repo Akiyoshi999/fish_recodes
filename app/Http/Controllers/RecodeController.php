@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Recode;
+use App\Http\Requests\RecodeRequest;
 
 class RecodeController extends Controller
 {
@@ -38,5 +39,43 @@ class RecodeController extends Controller
 
         // resourcesのview配下,第2引数で配列をviewに渡す
         return view('recode.detail', ['recode' => $recode]);
+    }
+    /**
+     * 釣果記録登録画面を表示する
+     * 
+     * @return view
+     */
+    public function showCreate()
+    {
+        return view('recode.form');
+    }
+    /**
+     * 釣果を登録する
+     * 
+     * @return view
+     */
+    public function exeStore(RecodeRequest $request)
+    {
+        // $validated = $request->validate([
+        //     'date' => 'required'
+        // ]);
+        // dd($request->all());
+        // 釣果記録を受け取る
+        // dump($validated);
+        $input = $request->all();
+        // dd($input);
+
+        \DB::beginTransaction();
+        try {
+            // 釣果を登録
+            Recode::create($input);
+            \DB::commit();
+        } catch (\Throwable $e) {
+            \DB::rollback();
+            abort(500);
+        }
+
+        \Session::flash('seccess_msg', '釣果を登録しました。');
+        return redirect(route('recodes'));
     }
 }
