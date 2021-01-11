@@ -22,17 +22,18 @@
                     <a class="nav-item nav-link" href="#">ブログ投稿</a>
                 </div>
             </div>
-        </nav </header>
-        <br>
-        <div class="container">
-            @yield('content')
+        </nav>
+    </header>
+    <br>
+    <div class="container">
+        @yield('content')
 
+    </div>
+    <footer class="footer bg-dark  fixed-bottom">
+        <div class="container text-center">
+            <span class="text-light">©︎福のプログラミング講座</span>
         </div>
-        <footer class="footer bg-dark  fixed-bottom">
-            <div class="container text-center">
-                <span class="text-light">©︎福のプログラミング講座</span>
-            </div>
-        </footer>
+    </footer>
 </body>
 
 </html>

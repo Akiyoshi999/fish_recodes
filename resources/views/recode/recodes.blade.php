@@ -21,7 +21,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <!-- <button type="button" class="btn btn-sm btn-outline-secondary">View</button> -->
-                                <a class="btn btn-sm btn-outline-secondary" href="recodes/{{ $recode->id }}">詳細</a>
+                                <a class="btn btn-sm btn-outline-secondary" href="recode/{{ $recode->id }}">詳細</a>
                                 <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
                                 <button type="button" class="btn btn-sm btn-outline-secondary">編集</button>
                                 <button type="button" class="btn btn-sm btn-outline-secondary">削除</button>
