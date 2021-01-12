@@ -27,7 +27,7 @@ Route::post('/recode/store', [RecodeController::class, 'exeStore'])->name('store
 Route::get('/recode/{id}', [RecodeController::class, 'showDetail'])->name('recode');
 
 // 釣果記録編集画面を表示
-Route::get('/recode/edit/{id}', [RecodeController::class, 'showEdit'])->name('edti');
+Route::get('/recode/edit/{id}', [RecodeController::class, 'showEdit'])->name('edit');
 
 // 釣果記録の編集情報を登録
 Route::post('/recode/update', [RecodeController::class, 'exeUpdate'])->name('update');
