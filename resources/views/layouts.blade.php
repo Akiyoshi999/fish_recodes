@@ -39,8 +39,12 @@
                 </p>
             </div>
         </section>
+        @if (session('success_msg'))
         <p class="text-success">{{ session('success_msg') }}</p>
-        <p class="text-danger">{{ session('err_msg') }}</p>
+        @endif
+        @if (session('err_msg'))
+        <p class="text-danger"> {{ session('err_msg') }}</p>
+        @endif
 
         <div class="album py-5 bg-light">
             <div class="container">

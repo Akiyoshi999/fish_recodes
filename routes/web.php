@@ -31,3 +31,6 @@ Route::get('/recode/edit/{id}', [RecodeController::class, 'showEdit'])->name('ed
 
 // 釣果記録の編集情報を登録
 Route::post('/recode/update', [RecodeController::class, 'exeUpdate'])->name('update');
+
+// 釣果記録を削除
+Route::post('/recode/delete/{id}', [RecodeController::class, 'exeDelete'])->name('delete');
