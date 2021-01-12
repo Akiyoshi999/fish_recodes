@@ -22,4 +22,33 @@
         </dl>
     </div>
 </div>
+<div class="mt-5">
+    <table>
+
+        <tr>
+            <td>
+                <form method="GET" action="{{ Route('edit', $recode->id) }}">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">編集</button>
+                </form>
+            </td>
+            <td>
+                <form method="POST" action="{{ Route('delete', $recode->id) }}" onsubmit="return checkDelete()">
+                    @csrf
+                    <button type="submit" class="btn btn-secondary">削除</button>
+                </form>
+            </td>
+            <td> <a class="btn btn-outline-secondary" href="{{ route('recodes') }}">戻る</a></td>
+        </tr>
+    </table>
+</div>
+<script>
+function checkDelete() {
+    if (window.confirm('削除してもよろしいですか')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+</script>
 @endsection
