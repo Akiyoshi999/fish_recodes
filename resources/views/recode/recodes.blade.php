@@ -24,7 +24,10 @@
                                 <a class="btn btn-sm btn-outline-secondary" href="recode/{{ $recode->id }}">詳細</a>
                                 <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
                                 <a class="btn btn-sm btn-outline-secondary" href="recode/edit/{{ $recode->id }}">編集</a>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">削除</button>
+                                <form method="POST" action="{{ Route('delete', $recode->id) }}"
+                                    onsubmit="return checkDelete()">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary">削除</button>
                             </div>
                             <!-- <small class="text-muted">9 mins</small> -->
                         </div>
@@ -35,4 +38,13 @@
         </div>
     </div>
 </div>
+<script>
+function checkDelete() {
+    if (window.confirm('削除してもよろしいですか')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+</script>
 @endsection

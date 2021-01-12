@@ -76,7 +76,7 @@ class RecodeController extends Controller
             abort(500);
         }
 
-        \Session::flash('seccess_msg', '釣果を登録しました。');
+        \Session::flash('success_msg', '釣果を登録しました。');
         return redirect(route('recodes'));
     }
 
@@ -137,7 +137,33 @@ class RecodeController extends Controller
             abort(500);
         }
 
-        \Session::flash('seccess_msg', '釣果情報を更新しました。');
+        \Session::flash('success_msg', '釣果情報を更新しました。');
+        return redirect(route('recodes'));
+    }
+
+
+    /**
+     * 釣果記録を削除する
+     * @param int $id 
+     * @return view
+     */
+    public function exeDelete($id)
+    {
+        if (empty($id)) {
+            \Session::flash('err_msg', 'データがありません');
+            return redirect(route('recodes'));
+        }
+
+        try {
+            // 釣果を削除
+            $recode = Recode::destroy($id);
+            \DB::commit();
+        } catch (\Throwable $e) {
+            \DB::rollback();
+            abort(500);
+        }
+
+        \Session::flash('success_msg', '釣果情報を削除しました。');
         return redirect(route('recodes'));
     }
 }
