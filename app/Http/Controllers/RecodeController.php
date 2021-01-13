@@ -36,6 +36,7 @@ class RecodeController extends Controller
         // データチェック
         if (is_null($recode)) {
             \Session::flash('err_msg', 'データがありません');
+            logger()->error("id=$id nod found", ['file' => __FUNCTION__, 'line' => __LINE__]);
             return redirect(route('recodes'));
         }
 
@@ -73,6 +74,7 @@ class RecodeController extends Controller
             \DB::commit();
         } catch (\Throwable $e) {
             \DB::rollback();
+            logger()->error($e, ['file' => __FUNCTION__, 'line' => __LINE__]);
             abort(500);
         }
 
@@ -93,6 +95,7 @@ class RecodeController extends Controller
         // データチェック
         if (is_null($recode)) {
             \Session::flash('err_msg', 'データがありません');
+            logger()->error("id=$id nod found", ['file' => __FUNCTION__, 'line' => __LINE__]);
             return redirect(route('recodes'));
         }
 
@@ -111,9 +114,6 @@ class RecodeController extends Controller
         // 釣果情報を受け取る
         $input = $request->all();
 
-
-        dump($input);
-        dump($input['id']);
         // dd($input);
         \DB::beginTransaction();
         try {
@@ -134,6 +134,7 @@ class RecodeController extends Controller
             \DB::commit();
         } catch (\Throwable $e) {
             \DB::rollback();
+            logger()->error($e, ['file' => __FUNCTION__, 'line' => __LINE__]);
             abort(500);
         }
 
@@ -151,6 +152,7 @@ class RecodeController extends Controller
     {
         if (empty($id)) {
             \Session::flash('err_msg', 'データがありません');
+            logger()->error("id=$id nod found", ['file' => __FUNCTION__, 'line' => __LINE__]);
             return redirect(route('recodes'));
         }
 
@@ -160,6 +162,7 @@ class RecodeController extends Controller
             \DB::commit();
         } catch (\Throwable $e) {
             \DB::rollback();
+            logger()->error($e, ['file' => __FUNCTION__, 'line' => __LINE__]);
             abort(500);
         }
 
