@@ -64,6 +64,7 @@ class RecodeController extends Controller
      */
     public function exeStore(RecodeRequest $request)
     {
+        // dd($request);
         // 釣果記録を受け取る
         $input = $request->all();
 
