@@ -10,20 +10,22 @@ class Recode extends Model
     use HasFactory;
 
     // テーブル名
-    protected $table = 'recodes';
+    protected $table = "recodes";
 
-    protected $dates = ['date'];
+    protected $dates = ["date"];
 
     // 可変項目
     protected $fillable = [
-        'user',
-        'date',
-        'place',
-        'weather',
-        'tide',
-        'temperature',
-        'fish',
-        'length',
-        'comment'
+        "user",
+        "date",
+        "place",
+        "weather",
+        "tide",
+        "temperature",
+        "fish",
+        "length",
+        "comment",
+        "file_name",
+        "file_path"
     ];
 }
