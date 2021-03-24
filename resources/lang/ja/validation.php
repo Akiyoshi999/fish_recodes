@@ -156,6 +156,7 @@ return [
         'fish' => '魚種',
         'length' => '長さ',
         'comment' => 'コメント',
+        'image' => '画像',
     ],
 
 ];

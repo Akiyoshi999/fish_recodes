@@ -114,8 +114,12 @@ class RecodeController extends Controller
     {
         // 釣果情報を受け取る
         $input = $request->all();
+        $upload_image = $input['image'];
 
-        // dd($input);
+        if ($upload_image) {
+            $path = $upload_image->store('uploads', 'public');
+        }
+
         \DB::beginTransaction();
         try {
             // 釣果情報を更新
@@ -130,6 +134,8 @@ class RecodeController extends Controller
                 'fish' => $input['fish'],
                 'length' => $input['length'],
                 'comment' => $input['comment'],
+                'file_name' => $upload_image->getClientOriginalName(),
+                'file_path' => $path
             ]);
             $recode->save();
             \DB::commit();

@@ -11,7 +11,8 @@ $fishs = $info['fish'];
 <div class="row">
     <div class="album py-5 bg-light">
         <h2>釣果登録フォーム</h2>
-        <form method="POST" action="{{ route('update') }}" onSubmit="return checkSubmit()">
+        <form method="POST" action="{{ route('update') }}" enctype="multipart/form-data"
+            onSubmit="return checkSubmit()">
             @csrf
             <input type="hidden" name="id" value="{{ $recode->id }}">
             <div class="form-group">
@@ -110,6 +111,12 @@ $fishs = $info['fish'];
                     placeholder="自由にコメントを記入してください">{{ $recode->comment }}</textarea>
                 @if ($errors->has('comment'))
                 <div class="text-danger">{{ $errors->first('comment') }}</div>
+                @endif
+            </div>
+            <div class="image">
+                <input type="file" name="image" accept="image/png, image/jpeg">
+                @if ($errors->has('image'))
+                <div class="text-danger">{{ $errors->first('image') }}</div>
                 @endif
             </div>
             <div class="mt-5">
