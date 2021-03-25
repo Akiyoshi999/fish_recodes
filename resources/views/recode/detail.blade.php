@@ -21,6 +21,9 @@
             <dd>{{ $recode->comment}}cm</dd>
         </dl>
     </div>
+    <div>
+        <img src="{{ Storage::url($recode->file_path) }}" height="300" width="400">
+    </div>
 </div>
 <div class="mt-5">
     <table>
