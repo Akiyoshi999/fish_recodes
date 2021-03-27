@@ -67,21 +67,24 @@ class RecodeController extends Controller
         // dd($request);
         // 釣果記録を受け取る
         $input = $request->all();
-        dd($input);
+
+        // コメントが空の場合空文字を代入
+        if (empty($input['image'])) {
+            $input['image'] = '';
+        }
+        // dd(empty($input['image']));
 
         // 画像が選択されていた場合、画像データを取得する
-        if (!$input['image']) {
-            $upload_image = $input['image'];
+        if (!empty($input['image'])) {
+            // $upload_image = $input['image'];
+            $input["file_path"] = $input['image']->store('uploads', 'public');
+            $input["file_name"] = $input['image']->getClientOriginalName();
+        } else {
+            $input["file_path"] = "uploads/no_image_square.jpg";
+            $input["file_name"] = "no_image_square.jpg";
         }
 
-        // 画像データをpublic/storage/uploads配下に保存する
-        if ($upload_image) {
-            $path = $upload_image->store('uploads', 'public');
-        }
-
-        $input 
-
-
+        // dd($input);
 
         \DB::beginTransaction();
         try {

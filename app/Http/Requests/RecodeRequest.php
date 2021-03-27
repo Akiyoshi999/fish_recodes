@@ -32,7 +32,7 @@ class RecodeRequest extends FormRequest
             'fish' => 'string',
             'temperature' => 'int | between:-10,50',
             'length' => 'int | between:0,200',
-            'comment' => 'string | max:500',
+            'comment' => 'string |nullable | max:500',
             'image' => 'file|image|mimes:png,jpeg',
         ];
     }

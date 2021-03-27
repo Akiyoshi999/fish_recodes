@@ -18,11 +18,11 @@
             <dt>長さ</dt>
             <dd>{{ $recode->length}}cm</dd>
             <dt>コメント</dt>
-            <dd>{{ $recode->comment}}cm</dd>
+            <dd>{{ $recode->comment}}</dd>
         </dl>
     </div>
     <div>
-        <img src="{{ Storage::url($recode->file_path) }}" height="300" width="400">
+        <img src="{{ Storage::url($recode->file_path) }}">
     </div>
 </div>
 <div class="mt-5">
