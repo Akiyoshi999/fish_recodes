@@ -64,7 +64,6 @@ class RecodeController extends Controller
      */
     public function exeStore(RecodeRequest $request)
     {
-        // dd($request);
         // 釣果記録を受け取る
         $input = $request->all();
 
@@ -72,7 +71,6 @@ class RecodeController extends Controller
         if (empty($input['image'])) {
             $input['image'] = '';
         }
-        // dd(empty($input['image']));
 
         // 画像が選択されていた場合、画像データを取得する
         if (!empty($input['image'])) {
@@ -84,7 +82,6 @@ class RecodeController extends Controller
             $input["file_name"] = "no_image_square.jpg";
         }
 
-        // dd($input);
 
         \DB::beginTransaction();
         try {
