@@ -7,9 +7,7 @@
             @foreach($recodes as $recode)
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top"
-                        data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                        alt="Card image cap">
+                    <img class="card-img-top" src="{{ Storage::url($recode->file_path) }}" alt="Card image cap">
                     <div class="card-body">
                         <div class="simple-contents">
                             <p>日時：{{ $recode->date->format('Y年m月d日') }}</p>

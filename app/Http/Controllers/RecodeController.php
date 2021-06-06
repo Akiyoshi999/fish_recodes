@@ -8,6 +8,7 @@ use App\Http\Requests\RecodeRequest;
 
 class RecodeController extends Controller
 {
+
     /**
      * 釣り記録一覧を表示する
      * 
@@ -64,9 +65,24 @@ class RecodeController extends Controller
      */
     public function exeStore(RecodeRequest $request)
     {
-        // dd($request);
         // 釣果記録を受け取る
         $input = $request->all();
+
+        // コメントが空の場合空文字を代入
+        if (empty($input['image'])) {
+            $input['image'] = '';
+        }
+
+        // 画像が選択されていた場合、画像データを取得する
+        if (!empty($input['image'])) {
+            // $upload_image = $input['image'];
+            $input["file_path"] = $input['image']->store('uploads', 'public');
+            $input["file_name"] = $input['image']->getClientOriginalName();
+        } else {
+            $input["file_path"] = "uploads/no_image_square.jpg";
+            $input["file_name"] = "no_image_square.jpg";
+        }
+
 
         \DB::beginTransaction();
         try {
@@ -115,31 +131,8 @@ class RecodeController extends Controller
         // 釣果情報を受け取る
         $input = $request->all();
 
-        // dd($input);
-        \DB::beginTransaction();
-        try {
-            // 釣果情報を更新
-            $recode = Recode::find($input['id']);
-            $recode->fill([
-                'user' => $input['user'],
-                'date' => $input['date'],
-                'place' => $input['place'],
-                'weather' => $input['weather'],
-                'tide' => $input['tide'],
-                'temperature' => $input['temperature'],
-                'fish' => $input['fish'],
-                'length' => $input['length'],
-                'comment' => $input['comment'],
-            ]);
-            $recode->save();
-            \DB::commit();
-        } catch (\Throwable $e) {
-            \DB::rollback();
-            logger()->error($e, ['file' => __FUNCTION__, 'line' => __LINE__]);
-            abort(500);
-        }
+        $this->recodeUpdate($input);
 
-        \Session::flash('success_msg', '釣果情報を更新しました。');
         return redirect(route('recodes'));
     }
 
@@ -169,5 +162,75 @@ class RecodeController extends Controller
 
         \Session::flash('success_msg', '釣果情報を削除しました。');
         return redirect(route('recodes'));
+    }
+
+    /**
+     * DBの更新
+     */
+    function recodeUpdate($data)
+    {
+        // コメントが空の場合空文字を代入
+        if (empty($data['image'])) {
+            $data['image'] = '';
+        }
+
+        /**
+         * 画像のデータの更新がある場合、画像データ更新
+         * 画像データの更新がない場合はDB画像データの更新はしない 
+         */
+        if (!empty($data['image'])) {
+            // $upload_image = $data['image'];
+            $data["file_path"] = $data['image']->store('uploads', 'public');
+            $data["file_name"] = $data['image']->getClientOriginalName();
+            \DB::beginTransaction();
+            try {
+                // 釣果情報を更新
+                $recode = Recode::find($data['id']);
+                $recode->fill([
+                    'user' => $data['user'],
+                    'date' => $data['date'],
+                    'place' => $data['place'],
+                    'weather' => $data['weather'],
+                    'tide' => $data['tide'],
+                    'temperature' => $data['temperature'],
+                    'fish' => $data['fish'],
+                    'length' => $data['length'],
+                    'comment' => $data['comment'],
+                    'file_name' => $data['file_name'],
+                    'file_path' => $data['file_path']
+                ]);
+                $recode->save();
+                \DB::commit();
+            } catch (\Throwable $e) {
+                \DB::rollback();
+                logger()->error($e, ['file' => __FUNCTION__, 'line' => __LINE__]);
+                abort(500);
+            }
+        } else {
+            \DB::beginTransaction();
+            try {
+                // 釣果情報を更新
+                $recode = Recode::find($data['id']);
+                $recode->fill([
+                    'user' => $data['user'],
+                    'date' => $data['date'],
+                    'place' => $data['place'],
+                    'weather' => $data['weather'],
+                    'tide' => $data['tide'],
+                    'temperature' => $data['temperature'],
+                    'fish' => $data['fish'],
+                    'length' => $data['length'],
+                    'comment' => $data['comment'],
+                ]);
+                $recode->save();
+                \DB::commit();
+            } catch (\Throwable $e) {
+                \DB::rollback();
+                logger()->error($e, ['file' => __FUNCTION__, 'line' => __LINE__]);
+                abort(500);
+            }
+
+            \Session::flash('success_msg', '釣果情報を更新しました。');
+        }
     }
 }
